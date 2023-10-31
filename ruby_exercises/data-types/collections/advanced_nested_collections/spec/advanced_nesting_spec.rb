@@ -21,57 +21,67 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(employees).to eq(expected)
   end
 
-  xit 'test 2' do
+  it 'test 2' do
     # Find the ingredients for pancakes
-    pancake_ingredients = _____
+    pancake_ingredients = stores[:dennys][:dishes][0][:ingredients]
 
     expected = ["Flour", "Eggs", "Milk", "Syrup"]
     expect(pancake_ingredients).to eq(expected)
   end
 
-  xit 'test 3' do
+  it 'test 3' do
     # Find the price of risotto
-    risotto_price = ____
+    risotto_price = stores[:olive_garden][:dishes][0][:price]
 
     expect(risotto_price).to eq(12)
   end
 
-  xit 'test 4' do
+  it 'test 4' do
     # Find the ingredients for a Big Mac
-    big_mac_ingredients = ____
+    big_mac_ingredients = stores[:macdonalds][:dishes][0][:ingredients]
 
     expected = ['Bun','Hamburger','Ketchup','pickles']
     expect(big_mac_ingredients).to eq(expected)
   end
 
-  xit 'test 5' do
+  it 'test 5' do
     # Find a list of restaurants
-    store_names = ____
+    store_names = stores.keys
 
     expected = [:olive_garden, :dennys, :macdonalds]
     expect(store_names).to eq(expected)
   end
 
-  xit 'test 6' do
+  it 'test 6' do
     # Find dishes names for Olive Garden
-    dishes_names = ____
+    dishes_names = [stores.dig(:olive_garden, :dishes, 0, :name), 
+    stores.dig(:olive_garden, :dishes, 1, :name)]
 
     expect(dishes_names).to eq(['Risotto', 'Steak'])
   end
 
-  xit 'test 7' do
+  it 'test 7' do
     # Return a list of employees across
     # all restaurants
-    employee_names = ____
+    employee_names = stores.dig(:olive_garden, :employees) +
+  stores.dig(:dennys, :employees) + 
+  stores.dig(:macdonalds, :employees)
+
+  
 
     expected = ["Jeff", "Zach", "Samantha", "Bob", "Sue", "James", "Alvin", "Simon", "Theodore"]
     expect(employee_names).to eq(expected)
   end
 
-  xit 'test 8' do
+  it 'test 8' do
     # Return a list of all ingredients
     # across all restaurants
-    ingredients = ____
+    ingredients = stores.dig(:olive_garden, :dishes, 0, :ingredients) +
+    stores.dig(:olive_garden, :dishes, 1, :ingredients) +
+    stores.dig(:dennys, :dishes, 0, :ingredients) +
+    stores.dig(:dennys, :dishes, 1, :ingredients) +
+    stores.dig(:macdonalds, :dishes, 0, :ingredients) +
+    stores.dig(:macdonalds, :dishes, 1, :ingredients)
 
     expected = [
       "Rice",
@@ -96,17 +106,26 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(ingredients).to eq(expected)
   end
 
-  xit 'test 9' do
+  it 'test 9' do
     # Return the full menu price for Olive Garden
-    full_menu_price = ____
+    full_menu_price = stores.dig(:olive_garden, :dishes, 0, :price) +
+    stores.dig(:olive_garden, :dishes, 1, :price)
 
     expect(full_menu_price).to eq(27)
   end
 
-  xit 'test 10' do
+  it 'test 10' do
     # Return the full menu for Olive Garden
 
-    olive_garden_menu = _____
+    # Had to break everything down so we first dig to get the value of the key :dishes
+    # that contains the array of two hashes. Then insert the two strings with the names
+    # of the dishes before the hash that contains their dish info. Then, that new array
+    # is sliced into portions containing 2 elements each and converted to individual
+    # arrays. Then that array with two sub arrays has the to_h method called with no 
+    # block given in order to turn the first element of each array into the key and
+    # the second element of each array into the value.
+    olive_garden_menu = stores.dig(:olive_garden, :dishes).insert(
+      0, "Risotto").insert(2, "Steak").each_slice(2).to_a.to_h
     
     expected = {
       "Risotto" => {
@@ -123,9 +142,20 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(olive_garden_menu).to eq(expected)
   end
 
-  xit 'test 11' do
+  it 'test 11' do
     # Return a full menu across all restaurants
-    full_menu = ____
+    olive_garden_menu = stores.dig(:olive_garden, :dishes).insert(
+      0, "Risotto").insert(2, "Steak").each_slice(2).to_a.to_h
+
+    dennys_menu = stores.dig(:dennys, :dishes).insert(0, "Pancakes"
+    ).insert(2, "Waffles").each_slice(2).to_a.to_h
+
+    macdonalds_menu = stores.dig(:macdonalds, :dishes).insert(0, "Big Mac"
+    ).insert(2, "Fries").each_slice(2).to_a.to_h
+    
+    full_menu = olive_garden_menu.merge(dennys_menu, macdonalds_menu)
+      
+
 
     expected = {
       "Risotto" => {
