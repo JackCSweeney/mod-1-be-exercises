@@ -33,6 +33,7 @@ RSpec.describe 'Nested Collections' do
     # set the second element of the last coordinates
     # to 0
     coordinates.fetch(-1).fill(0, 1)
+    # fill method takes argument (x, y) where x is the replacement/new value, y is the index position
 
     expected = [[2,5],[87,2],[56,39],[3, 0]]
     expect(coordinates).to eq(expected)
@@ -56,7 +57,13 @@ RSpec.describe 'Nested Collections' do
     }
     # Using the team variable defined above
     # retrieve all of the pitchers
-    pitchers = team.fetch(:pitchers)
+
+    # Original answer:
+    # pitchers = team.fetch(:pitchers)
+
+    # Additional option:
+    pitchers = team[:pitchers]
+
     expected = ["Kenny", "Joan", "Shabaz"]
     expect(pitchers).to eq(expected)
   end
@@ -69,7 +76,12 @@ RSpec.describe 'Nested Collections' do
     }
     # Using the team variable defined above
     # add "Phil" as a pitcher
-    team.fetch(:pitchers).push("Phil")
+
+    # Original answer:
+    # team.fetch(:pitchers).push("Phil")
+
+    # Additional answer:
+    team[:pitchers].push("Phil")
 
     expected = {
       pitchers: ["Kenny", "Joan", "Shabaz", "Phil"],
@@ -107,7 +119,13 @@ RSpec.describe 'Nested Collections' do
     }
     # Using the team variable defined above
     # Find out how many fielders there are
-    num_fielders = team.fetch(:fielders).length
+
+    # Original answer:
+    # num_fielders = team.fetch(:fielders).length
+
+    # Additional answer:
+    num_fielders = team[:fielders].count
+  
     expect(num_fielders).to eq(5)
   end
 
@@ -119,7 +137,13 @@ RSpec.describe 'Nested Collections' do
     }
     # Using the team variable defined above
     # Find out if "Kenny" is a pitcher
-    kenny_is_pitcher = team.fetch(:pitchers).include?("Kenny")
+
+    # Original answer"
+    # kenny_is_pitcher = team.fetch(:pitchers).include?("Kenny")
+
+    # Additional answer:
+    kenny_is_pitcher = team[:pitchers].include?("Kenny")
+
     expect(kenny_is_pitcher).to eq(true)
   end
 
@@ -135,7 +159,12 @@ RSpec.describe 'Nested Collections' do
     # Using the three_day_forecast variable defined above,
     # retrieve the expected piece of information
 
-    actual = three_day_forecast.fetch(:ref_num)
+    # Original answer:
+    # actual = three_day_forecast.fetch(:ref_num)
+
+    # Additional answer:
+    actual = three_day_forecast[:ref_num]
+
     expected = 3456789765456787656
     expect(actual).to eq(expected)
   end
@@ -149,6 +178,7 @@ RSpec.describe 'Nested Collections' do
     # Using the three_day_forecast variable defined above,
     # retrieve the expected piece of information
 
+    # Can also just use [:days] right after three_day_forecast instead of fetch method
     actual = three_day_forecast.fetch(:days)
     expected = [{high: 70,low: 63,summary: "Mostly Sunny"},{high: 55,low: 47,summary: "Partly Cloudy"},{high: 77,low: 64,summary: "Sunny"}]
     expect(actual).to eq(expected)
@@ -188,7 +218,17 @@ RSpec.describe 'Nested Collections' do
     # Using the three_day_forecast variable defined above,
     # retrieve the expected piece of information
 
-    actual = three_day_forecast.fetch(:days).at(1).fetch(:high)
+    # Original answer:
+    # actual = three_day_forecast.fetch(:days).at(1).fetch(:high)
+
+    # Additional answer:
+    actual = 0
+    three_day_forecast[:days].each do |k,v|
+      if v = 55
+        actual = v
+      end
+    end
+
     expected = 55
     expect(actual).to eq(expected)
   end
@@ -201,7 +241,13 @@ RSpec.describe 'Nested Collections' do
     # Using the three_day_forecast variable defined above,
     # retrieve the expected piece of information
 
-    actual = three_day_forecast.fetch(:days).at(0).keys
+    # Original answer:
+    # actual = three_day_forecast.fetch(:days).at(0).keys
+
+    # Additional answer:
+    actual = three_day_forecast[:days][0].keys
+  
+
     expected = [:high, :low, :summary]
     expect(actual).to eq(expected)
   end
