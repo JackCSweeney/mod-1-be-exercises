@@ -2,12 +2,15 @@ RSpec.describe 'Hashes' do
   it 'test 1' do
     # In the line below, create a new empty hash called empty
     empty = Hash.new
+    # or could do empty = {}
     expect(empty).to eq({})
   end
 
   it 'test 2' do
     # In the line below, create an empty hash with a default value 0
     empty = Hash.new(0)
+    # Using Hash.new(x) will allow you to set the default value to what you would like it to be for the has rather
+    # than having it set as 'nil' which is what happens when it is created by using just and empty hash {}
     expect(empty[:not_found]).to eq(0)
   end
 
@@ -42,6 +45,7 @@ RSpec.describe 'Hashes' do
     # In the line below, create a new hash called ingredients.
     # Create a "tomatoes" key and a :carrots key with the corresponding values.
     ingredients = {"tomatoes" => 3, :carrots => 7}
+    # could also do ingredients = {"tomatoes" => 3, "carrots": 7}
 
     expect(ingredients["tomatoes"]).to eq(3)
     expect(ingredients[:carrots]).to eq(7)
@@ -112,6 +116,7 @@ RSpec.describe 'Hashes' do
     # Using the books hash defined above,
     # delete the key "Harper Lee"
     books.delete("Harper Lee")
+    # delete removes the key value pair, not just the key
     expected = {
       "John Steinbeck" => "Grapes of Wrath"
     }
@@ -185,7 +190,13 @@ RSpec.describe 'Hashes' do
     }
     # Using the ages hash defined above
     # increment Julio's age by one
-    ages.store("Julio", 9)
+
+    # Original answer
+    # ages.store("Julio", 9)
+
+    # can also do this below. we're grabbing the value of "Julio" from the hash, they having it add 1 to the integer value
+    ages["Julio"] += 1
+
     expect(ages["Julio"]).to eq(9)
   end
 
