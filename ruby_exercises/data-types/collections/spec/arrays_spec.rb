@@ -35,7 +35,7 @@ RSpec.describe 'Arrays' do
 
     # Now try to find another way to achieve the same effect
     nums = [1,2,3]
-    actual = nums.fetch(2)
+    actual = nums.last
     expected = 3
     expect(actual).to eq(expected)
   end
@@ -44,7 +44,7 @@ RSpec.describe 'Arrays' do
     hummus = ["tahini", "chickpeas", "lemons"]
     # Call a method on the hummus variable that will
     # tell us how many elements there are in the array
-    expect(hummus.length).to eq(3)
+    expect(hummus.count).to eq(3)
   end
 
   it 'test 4' do
@@ -160,6 +160,7 @@ RSpec.describe 'Arrays' do
     # one string like this: "Sarah, Owen, Peter"
     one_string = children.join(", ")
     # join method with argument (x) where x is what you want placed between each element being joined
+    # if nothing is in the argument, it joins them all together with nothing inbetween them
     expect(one_string).to eq("Sarah, Owen, Peter")
   end
 
