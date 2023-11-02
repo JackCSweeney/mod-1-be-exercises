@@ -39,7 +39,7 @@ RSpec.describe 'Advanced Nested Collections' do
   it 'test 4' do
     # Find the ingredients for a Big Mac
 
-    # could also use .find(name: "Big Mac").first[:insgredients] if we didn't 
+    # could also use .find(name: "Big Mac").first[:ingredients] if we didn't 
     # know or want to look for the index of big mac
     big_mac_ingredients = stores[:macdonalds][:dishes][0][:ingredients]
 
@@ -61,7 +61,8 @@ RSpec.describe 'Advanced Nested Collections' do
     # instead of doing two separate methods, and combining them in an array,
     # you could do a .map method after dishes with .map do |dish| dish[:name]
     # Example of different version with iteration through .map method: 
-    dishes_names = stores[:olive_garden][:dishes].map do |dish| dish[:name]
+    dishes_names = stores[:olive_garden][:dishes].map do |dish| 
+      dish[:name]
     end
     
     #Original answer:
@@ -82,7 +83,7 @@ RSpec.describe 'Advanced Nested Collections' do
     # Example of another method:
     # we make employee names into and empty array
     # then call .each to iterate through each key and its values
-    # then we call the concat method with the argument of the values from stores that are :employees
+    # then we call the concat method with the argument of the values of the keys :employees from each store
     # to make all of the arrays of strings concatenate into one array of strings with each employee
     # then we end the iteration
     employee_names = []
@@ -114,7 +115,7 @@ RSpec.describe 'Advanced Nested Collections' do
     # then call concatenate on ingredients with the arguement dish while grabbing the values of :ingredients
     # keys. then we end both do statements/iterations
   ingredients = []
-  stores.each_pair do |store, data|
+  stores.each do |store, data|
     data[:dishes].each do |dish|
     ingredients.concat(dish[:ingredients])
     end
