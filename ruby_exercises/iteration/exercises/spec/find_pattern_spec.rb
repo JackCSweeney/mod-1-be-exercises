@@ -30,17 +30,19 @@ RSpec.describe 'find pattern' do
     expect(first_younger_than_thirty).to eq(:ladonna)
   end
 
-  xit 'test 3' do
+  it 'test 3' do
     ages = [39, 45, 29, 24, 50]
     first_older_than_fifty = nil
     ages.each do |age|
-      # Your Code Here
+      if age > 50
+        first_older_than_fifty = age
+      end
     end
 
     expect(first_older_than_fifty).to be_nil
   end
 
-  xit 'test 4' do
+  it 'test 4' do
     ages = {
       abdi: 39,
       hassan: 45,
@@ -50,21 +52,28 @@ RSpec.describe 'find pattern' do
     }
     first_older_than_fifty = nil
     ages.each do |name, age|
-      # Your Code Here
+      if age > 50
+        first_older_than_fifty = name
+      end
     end
 
     expect(first_older_than_fifty).to be_nil
   end
 
-  xit 'test 5' do
+  it 'test 5' do
     ages = [39, 45, 29, 24, 50]
     first_multiple_of_three = nil
-    # Your Code Here
+    ages.each do |age|
+      if age % 3 == 0
+        first_multiple_of_three = age
+        break
+      end
+    end
 
     expect(first_multiple_of_three).to eq(39)
   end
 
-  xit 'test 6' do
+  it 'test 6' do
     ages = {
       abdi: 39,
       hassan: 45,
@@ -73,19 +82,29 @@ RSpec.describe 'find pattern' do
       miguel: 50
     }
     first_multiple_of_three = nil
-    # Your Code Here
+    ages.each do |name, age|
+      if age % 3 == 0
+        first_multiple_of_three = name
+        break
+      end
+    end
 
     expect(first_multiple_of_three).to eq(:abdi)
   end
 
-  xit 'test 7' do
+  it 'test 7' do
     people = ["Willie", "Carmen Sandiego", "Bryan", "Faith", "Zac"]
-    # Your Code Here
+    carmen = ""
+    people.each do |name|
+      if name == "Carmen Sandiego"
+        carmen = "Carmen Sandiego"
+      end
+    end
 
     expect(carmen).to eq("Carmen Sandiego")
   end
 
-  xit 'test 8' do
+  it 'test 8' do
     places = {
       Bangkok: "Willie",
       Santa_Fe: "Carmen Sandiego",
@@ -93,19 +112,30 @@ RSpec.describe 'find pattern' do
       Munich: "Faith",
       Mogudishu: "Zac"
     }
-    # Your Code Here
+    where_is_carmen_sandiego = ()
+    places.each do |place, person|
+      if person == "Carmen Sandiego"
+        where_is_carmen_sandiego = place
+      end
+    end
 
     expect(where_is_carmen_sandiego).to eq(:Santa_Fe)
   end
 
-  xit 'test 9' do
+  it 'test 9' do
     numbers = [3, 7, 13, 11, 10, 2, 17]
-    # Your Code Here
+    first_even = ()
+    numbers.each do |num|
+      if num.even? == true
+        first_even = num
+        break
+      end
+    end
 
     expect(first_even).to eq(10)
   end
 
-  xit 'test 10' do
+  it 'test 10' do
     purchases = {
       "shoes" => :paid,
       "backpack" => :paid,
@@ -113,12 +143,18 @@ RSpec.describe 'find pattern' do
       "posters" => :paid,
       "food" => :pending
     }
-    # Your Code Here
+    first_pending = ()
+    purchases.each do |item, status|
+      if status == :pending
+        first_pending = item
+        break
+      end
+    end
 
     expect(first_pending).to eq("books").or eq("food")
   end
 
-  xit 'test 11' do
+  it 'test 11' do
     purchases = {
       "shoes" => :paid,
       "backpack" => :paid,
@@ -126,7 +162,13 @@ RSpec.describe 'find pattern' do
       "posters" => :paid,
       "food" => :pending
     }
-    # Your Code Here
+    starts_with_s = ()
+    purchases.each do |item, status|
+      if item.start_with?('s') == true
+        starts_with_s = item
+        break
+      end
+    end
 
     expect(starts_with_s).to eq("shoes")
   end
