@@ -1,4 +1,5 @@
-require "./lib/mad_lib"
+require 'rspec'
+require "../lib/mad_lib"
 
 RSpec.describe MadLib do
 
