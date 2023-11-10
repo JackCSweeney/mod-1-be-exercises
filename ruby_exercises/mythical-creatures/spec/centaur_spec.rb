@@ -1,5 +1,5 @@
-require './spec/spec_helper'
-require './lib/centaur'
+require '../spec/spec_helper'
+require '../lib/centaur'
 
 RSpec.describe Centaur do
   it 'has a name' do
