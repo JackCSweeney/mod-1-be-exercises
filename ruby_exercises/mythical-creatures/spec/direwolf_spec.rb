@@ -97,7 +97,7 @@ RSpec.describe Direwolf do
   # I think I should be able to make the code in direwolf.rb in the 
   # Stark class to be dependent on the direwolf class, but it doesn't seem
   # to interact with eachother correctly
-  xit 'protects the Starks' do
+  it 'protects the Starks' do
     wolf = Direwolf.new('Nymeria', "Winterfell")
     arya_stark = Stark.new('Arya')
     sansa_stark = Stark.new('Sansa')
