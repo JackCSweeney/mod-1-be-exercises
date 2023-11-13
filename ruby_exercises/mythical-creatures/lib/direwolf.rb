@@ -28,10 +28,9 @@ class Direwolf
     end
 
     def protects(stark)
-        case
-            # add pry here to check if this is a class
-        when stark.location == @home && @starks_to_protect.length < 2
+        if stark.location == @home && @starks_to_protect.length < 2
             @starks_to_protect << stark
+            stark.protected_by(self) # line to indicate that the Stark is being protected
         end
     end
 
@@ -50,7 +49,7 @@ class Direwolf
 end
 
 class Stark
-    attr_accessor :name, :location, :safe
+    attr_accessor :name, :location, :safe, :protector
     def initialize(name, location = nil)
         @name = name
         if location != nil
@@ -60,14 +59,23 @@ class Stark
         end
         @safe = false
         @house_words = 'Winter is Coming'
+        @protector = nil # needed a variable to indicate if stark has a protector
     end
 
     def name
         @name
     end
 
+    def protected_by(direwolf)
+        @protector = direwolf
+    end
+
     def safe?
-       if @starks_to_protect.include?
+       if @protector != nil
+        true
+       else
+        false
+       end
     end
 
     def location
