@@ -30,7 +30,7 @@ class Direwolf
     def protects(stark)
         if stark.location == @home && @starks_to_protect.length < 2
             @starks_to_protect << stark
-            stark.protected_by(self) # line to indicate that the Stark is being protected
+            stark.safe = true
         end
     end
 
@@ -43,8 +43,10 @@ class Direwolf
         end
     end
 
-    def leaves(string)
-        @starks_to_protect.delete(string)    
+    def leaves(stark)
+        stark.safe = false
+        @starks_to_protect.delete(stark) 
+
     end
 end
 
@@ -59,23 +61,15 @@ class Stark
         end
         @safe = false
         @house_words = 'Winter is Coming'
-        @protector = nil # needed a variable to indicate if stark has a protector
+        
     end
 
     def name
         @name
     end
 
-    def protected_by(direwolf)
-        @protector = direwolf
-    end
-
     def safe?
-       if @protector != nil
-        true
-       else
-        false
-       end
+      @safe
     end
 
     def location
