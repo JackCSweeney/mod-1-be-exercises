@@ -1,5 +1,5 @@
-require './spec/spec_helper'
-require './lib/ogre'
+require '../spec/spec_helper'
+require '../lib/ogre'
 
 RSpec.describe Ogre do
   it 'has a name' do
@@ -59,7 +59,7 @@ RSpec.describe Ogre do
     expect(ogre.swings).to eq(1)
   end
 
-  it 'swings its club when noticed by a human' do
+  it 'swings xits club when noticed by a human' do
     ogre = Ogre.new('Brak')
     human = Human.new
     ogre.encounter(human)
@@ -73,7 +73,7 @@ RSpec.describe Ogre do
     expect(human.notices_ogre?).to be true
   end
 
-  it 'hits the human every second time it swings' do
+  it 'hxits the human every second time xit swings' do
     ogre = Ogre.new('Brak')
     human = Human.new
 
