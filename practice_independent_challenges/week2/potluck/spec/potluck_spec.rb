@@ -139,8 +139,6 @@ RSpec.describe Potluck do
         potluck.add_dish(candy_salad)        
         potluck.add_dish(bean_dip)
 
-        menu = {:appetizer=>["Bean Dip", "Couscous Salad", "Summer Pizza"],:entre=>["Cocktail Meatballs", "Roast Pork"],:dessert=>["Candy Salad"]}
-
         expect(potluck.ratio(:appetizer)).to eq(50.0)
     end
 end
