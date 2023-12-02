@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/potluck.rb'
+require './lib/dish.rb'
 
 RSpec.describe Potluck do
     it 'exists' do
